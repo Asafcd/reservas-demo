@@ -1,0 +1,15 @@
+import 'bloc/inicio_de_sesi_n_twentyone_container_bloc.dart';import 'models/inicio_de_sesi_n_twentyone_container_model.dart';import 'package:asaf_s_application2/core/app_export.dart';import 'package:asaf_s_application2/presentation/inicio_de_sesi_n_forty_page/inicio_de_sesi_n_forty_page.dart';import 'package:asaf_s_application2/presentation/inicio_de_sesi_n_fortynine_page/inicio_de_sesi_n_fortynine_page.dart';import 'package:asaf_s_application2/presentation/inicio_de_sesi_n_ninetytwo_page/inicio_de_sesi_n_ninetytwo_page.dart';import 'package:asaf_s_application2/presentation/inicio_de_sesi_n_twentyone_page/inicio_de_sesi_n_twentyone_page.dart';import 'package:asaf_s_application2/widgets/custom_bottom_bar.dart';import 'package:flutter/material.dart';
+// ignore_for_file: must_be_immutable
+class InicioDeSesiNTwentyoneContainerScreen extends StatelessWidget {InicioDeSesiNTwentyoneContainerScreen({Key? key}) : super(key: key);
+
+GlobalKey<NavigatorState> navigatorKey = GlobalKey();
+
+static Widget builder(BuildContext context) { return BlocProvider<InicioDeSesiNTwentyoneContainerBloc>(create: (context) => InicioDeSesiNTwentyoneContainerBloc(InicioDeSesiNTwentyoneContainerState(inicioDeSesiNTwentyoneContainerModelObj: InicioDeSesiNTwentyoneContainerModel()))..add(InicioDeSesiNTwentyoneContainerInitialEvent()), child: InicioDeSesiNTwentyoneContainerScreen()); } 
+@override Widget build(BuildContext context) { mediaQueryData = MediaQuery.of(context); return BlocBuilder<InicioDeSesiNTwentyoneContainerBloc, InicioDeSesiNTwentyoneContainerState>(builder: (context, state) {return SafeArea(child: Scaffold(body: Navigator(key: navigatorKey, initialRoute: AppRoutes.inicioDeSesiNTwentyonePage, onGenerateRoute: (routeSetting) => PageRouteBuilder(pageBuilder: (ctx, ani, ani1) => getCurrentPage(context, routeSetting.name!), transitionDuration: Duration(seconds: 0))), bottomNavigationBar: Padding(padding: EdgeInsets.symmetric(horizontal: 8.h), child: _buildBottomBar(context))));}); } 
+/// Section Widget
+Widget _buildBottomBar(BuildContext context) { return CustomBottomBar(onChanged: (BottomBarEnum type) {Navigator.pushNamed(navigatorKey.currentContext!, getCurrentRoute(type));}); } 
+///Handling route based on bottom click actions
+String getCurrentRoute(BottomBarEnum type) { switch (type) {case BottomBarEnum.Promociones: return AppRoutes.inicioDeSesiNTwentyonePage; case BottomBarEnum.Favoritos: return AppRoutes.inicioDeSesiNFortyPage; case BottomBarEnum.Cercadem: return AppRoutes.inicioDeSesiNFortyninePage; case BottomBarEnum.Pickup: return AppRoutes.inicioDeSesiNNinetytwoPage; default: return "/";} } 
+///Handling page based on route
+Widget getCurrentPage(BuildContext context, String currentRoute, ) { switch (currentRoute) {case AppRoutes.inicioDeSesiNTwentyonePage: return InicioDeSesiNTwentyonePage(); case AppRoutes.inicioDeSesiNFortyPage: return InicioDeSesiNFortyPage(); case AppRoutes.inicioDeSesiNFortyninePage: return InicioDeSesiNFortyninePage(); case AppRoutes.inicioDeSesiNNinetytwoPage: return InicioDeSesiNNinetytwoPage(); default: return DefaultWidget();} } 
+ }
